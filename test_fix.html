@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMS导航测试</title>
+    <style>
+        .page {
+            display: none;
+            width: 100%;
+            min-height: 500px;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+        }
+        .page.active {
+            display: block !important;
+        }
+        .nav-item {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background: #f0f0f0;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+        .nav-item.active {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <div class="nav-item active" onclick="switchPage('timesheet')">工时管理</div>
+        <div class="nav-item" onclick="switchPage('project-management')">项目管理</div>
+        <div class="nav-item" onclick="switchPage('staff-management')">人员管理</div>
+    </div>
+
+    <div class="main-content">
+        <div id="timesheetPage" class="page active">
+            <h1>工时管理页面</h1>
+            <p>这是工时管理页面的内容。</p>
+        </div>
+
+        <div id="project-managementPage" class="page">
+            <h1>项目管理页面</h1>
+            <p>这是项目管理页面的内容。</p>
+            <div>
+                <h3>项目列表</h3>
+                <table border="1">
+                    <tr><th>项目名称</th><th>状态</th></tr>
+                    <tr><td>项目A</td><td>进行中</td></tr>
+                    <tr><td>项目B</td><td>已完成</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="staff-managementPage" class="page">
+            <h1>人员管理页面</h1>
+            <p>这是人员管理页面的内容。</p>
+        </div>
+    </div>
+
+    <script>
+        function switchPage(pageId) {
+            console.log('切换到页面:', pageId);
+            
+            // 隐藏所有页面
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => {
+                p.classList.remove('active');
+            });
+            
+            // 显示目标页面
+            const targetPage = document.getElementById(pageId + 'Page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+                console.log('页面已激活:', pageId);
+            }
+
+            // 更新导航状态
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
